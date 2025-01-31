@@ -1,0 +1,185 @@
+/* Reset básico para garantir consistência entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-size: 18px;
+    font-weight: 500;
+    color: #007bff;
+    padding: 5px 10px;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaçamento entre os campos */
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1 1 calc(16.66% - 15px); /* 6 campos por linha */
+    min-width: 150px; /* Largura mínima para cada campo */
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.resultado-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.resultado-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.resultado-header h2 {
+    font-size: 18px;
+    color: #007bff;
+    margin: 0;
+}
+
+.resultado-header button {
+    padding: 4px 8px; /* Ajuste o padding para um tamanho menor */
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Espaçamento à esquerda para separar do título */
+    flex-shrink: 0; /* Impede que o botão encolha */
+    width: auto; /* Ajusta o comprimento do botão ao tamanho do texto */
+}
+
+.resultado-header button:hover {
+    background-color: #218838;
+}
+
+.resultado {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #333;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.resultado pre {
+    margin: 0;
+    font-family: inherit;
+}
+
+/* Destacar a palavra "GLICOSE" no campo "OUTROS" */
+.resultado pre .destaque-glicose {
+    background-color: #fff3cd; /* Fundo amarelo claro */
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+/* Estilo para destacar o campo GLICOSE */
+.destaque-glicose {
+    background-color: #ffeb3b; /* Amarelo chamativo */
+    padding: 2px 5px; /* Espaçamento interno */
+    border-radius: 3px; /* Bordas arredondadas */
+    font-weight: bold; /* Negrito para destacar mais */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .form-group {
+        flex: 1 1 calc(33.33% - 15px); /* 3 campos por linha em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .form-group {
+        flex: 1 1 calc(50% - 15px); /* 2 campos por linha em telas muito pequenas */
+    }
+}
