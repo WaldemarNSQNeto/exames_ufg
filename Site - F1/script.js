@@ -61,7 +61,7 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
 
     // PARTE 04: GASOMETRIA ARTERIAL
     const camposGasometriaArterial = [
-        "pH (Arterial)", "PCO3 (Arterial)", "PO2 (Arterial)", "HCO3 (Arterial)", "BE (Arterial)", "SatO2 (Arterial)", "Lac (Arterial)"
+        "pH (Arterial)", "PCO2 (Arterial)", "PO2 (Arterial)", "HCO3 (Arterial)", "BE (Arterial)", "SatO2 (Arterial)", "Lac (Arterial)"
     ];
     const gasometriaArterialFormatado = camposGasometriaArterial
         .map((campo) => (resultado[campo] ? `${campo.replace(/ \(Arterial\)/g, "")} ${resultado[campo]}` : null))
@@ -73,7 +73,7 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
 
     // PARTE 05: GASOMETRIA VENOSA
     const camposGasometriaVenosa = [
-        "pH (Venosa)", "PCO3 (Venosa)", "PO2 (Venosa)", "HCO3 (Venosa)", "BE (Venosa)", "SatO2 (Venosa)", "Lac (Venosa)"
+        "pH (Venosa)", "PCO2 (Venosa)", "PO2 (Venosa)", "HCO3 (Venosa)", "BE (Venosa)", "SatO2 (Venosa)", "Lac (Venosa)"
     ];
     const gasometriaVenosaFormatado = camposGasometriaVenosa
         .map((campo) => (resultado[campo] ? `${campo.replace(/ \(Venosa\)/g, "")} ${resultado[campo]}` : null))
