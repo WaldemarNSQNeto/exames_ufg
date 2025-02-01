@@ -214,8 +214,9 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
     const resultadoDiv = document.getElementById('resultado');
     resultadoDiv.innerHTML = resultadoFormatado;
 
-    // Mostra o botão de copiar
+    // Mostra os botões "Copiar Resultados" e "Limpar Dados"
     document.getElementById('copiarResultado').style.display = 'block';
+    document.getElementById('limparDados').style.display = 'block';
 });
 
 // Função para copiar o resultado
@@ -245,4 +246,20 @@ document.getElementById('copiarResultado').addEventListener('click', function ()
         }
         document.body.removeChild(textarea);
     }
+});
+
+// Função para limpar os dados do formulário
+document.getElementById('limparDados').addEventListener('click', function () {
+    // Limpa todos os campos do formulário
+    document.getElementById('exameForm').reset();
+
+    // Limpa a área de resultados
+    document.getElementById('resultado').innerHTML = '';
+
+    // Oculta os botões "Copiar Resultados" e "Limpar Dados"
+    document.getElementById('copiarResultado').style.display = 'none';
+    document.getElementById('limparDados').style.display = 'none';
+  
+  // Rola a página para o início do formulário
+    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 });
