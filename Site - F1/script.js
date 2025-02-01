@@ -18,40 +18,152 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
     // PARTE 01: IDENTIFICAÇÃO
     if (resultado["PCT"] || resultado["Data do Exame"]) {
         resultadoFormatado += `PCT: ${resultado["PCT"] || ""}\n`;
-        resultadoFormatado += `> LAB ${resultado["Data do Exame"] || ""}: `;
+
+        // Formata a data no formato DIA/MÊS/ANO
+        const dataExame = resultado["Data do Exame"];
+        if (dataExame) {
+            const [ano, mes, dia] = dataExame.split('-'); // Divide a data no formato ISO (YYYY-MM-DD)
+            resultadoFormatado += `> LAB ${dia}/${mes}/${ano}: `;
+        } else {
+            resultadoFormatado += `> LAB : `;
+        }
     }
 
     // PARTE 02: HEMOGRAMA
     const camposHemograma = [
-        "Hb", "Ht", "VCM", "HCM", "CHCM", "RDW", "LEUCO TOTAL", "PROMIELO", "MIELO", "METAMIELO", "BAST", "SEGM", "EOSI", "BASO", "LINFO", "LINFO ATPC", "MONO", "BLASTO", "PLASMO"
+        "Hb", "Ht", "VCM", "HCM", "CHCM", "RDW", "LEUCO TOTAL"
     ];
     const hemogramaFormatado = camposHemograma
         .map((campo) => (resultado[campo] ? `${campo} ${resultado[campo]}` : null))
         .filter((item) => item !== null)
         .join(" / ");
 
-    // Adiciona "PLAQ" apenas se houver valor
-    if (resultado["PLAQ"]) {
-        if (hemogramaFormatado) {
-            resultadoFormatado += `${hemogramaFormatado} / PLAQ ${resultado["PLAQ"]} //\n`;
-        } else {
-            resultadoFormatado += `PLAQ ${resultado["PLAQ"]} //\n`;
-        }
-    } else if (hemogramaFormatado) {
-        resultadoFormatado += `${hemogramaFormatado} //\n`;
-    }
-
-    // PARTE 03: OUTROS EXAMES
-    const camposOutrosExames = [
-        "TAP", "% TAP", "INR", "GLICOSE", "UR", "CR", "Na", "K", "Mg", "Ca", "P", "Cl", "TGO", "TGP", "BT", "BD", "BI", "PCR", "TTPA", "RATIO"
+    // Campos que devem estar entre parênteses
+    const camposEntreParenteses = [
+        "PROMIELO", "MIELO", "METAMIELO", "BAST", "SEGM", "EOSI", "BASO", "LINFO", "LINFO ATPC", "MONO", "BLASTO", "PLASMO"
     ];
-    const outrosExamesFormatado = camposOutrosExames
+    const camposParentesesFormatado = camposEntreParenteses
         .map((campo) => (resultado[campo] ? `${campo} ${resultado[campo]}` : null))
         .filter((item) => item !== null)
         .join(" / ");
 
+    // Adiciona os campos entre parênteses, se houver
+    if (camposParentesesFormatado) {
+        if (hemogramaFormatado) {
+            resultadoFormatado += `${hemogramaFormatado} (${camposParentesesFormatado})`;
+        } else {
+            resultadoFormatado += `(${camposParentesesFormatado})`;
+        }
+    } else if (hemogramaFormatado) {
+        resultadoFormatado += `${hemogramaFormatado}`;
+    }
+
+    // Adiciona "PLAQ" apenas se houver valor
+    if (resultado["PLAQ"]) {
+        resultadoFormatado += ` / PLAQ ${resultado["PLAQ"]}`;
+    }
+
+    // Fecha a linha do hemograma
+    if (hemogramaFormatado || camposParentesesFormatado || resultado["PLAQ"]) {
+        resultadoFormatado += " //\n";
+    }
+
+    // PARTE 03: OUTROS EXAMES
+    const camposOutrosExames = [
+        "TAP", "INR", "GLICOSE", "UR", "CR", "Na", "K", "Mg", "Ca", "P", "Cl", "TGO", "TGP", "BT", "BD", "BI", "PCR", "TTPA", "RATIO"
+    ];
+    let outrosExamesFormatado = "";
+
+    // Formatação especial para TAP e % TAP
+    if (resultado["TAP"] && resultado["% TAP"]) {
+        outrosExamesFormatado += `TAP ${resultado["TAP"]} - ${resultado["% TAP"]}%`;
+    } else if (resultado["TAP"]) {
+        outrosExamesFormatado += `TAP ${resultado["TAP"]}`;
+    } else if (resultado["% TAP"]) {
+        outrosExamesFormatado += `${resultado["% TAP"]}%`;
+    }
+
+    // Adiciona INR após TAP e % TAP
+    if (resultado["INR"]) {
+        if (outrosExamesFormatado) {
+            outrosExamesFormatado += ` - INR ${resultado["INR"]} //`;
+        } else {
+            outrosExamesFormatado += `INR ${resultado["INR"]} //`;
+        }
+    }
+
+    // Adiciona GLICOSE com "//"
+    if (resultado["GLICOSE"]) {
+        outrosExamesFormatado += ` GLICOSE ${resultado["GLICOSE"]} //`;
+    }
+
+    // Adiciona UR e CR com "/"
+    if (resultado["UR"] || resultado["CR"]) {
+        const urCrFormatado = [
+            resultado["UR"] ? `UR ${resultado["UR"]}` : null,
+            resultado["CR"] ? `CR ${resultado["CR"]}` : null
+        ]
+            .filter((item) => item !== null)
+            .join(" / ");
+        outrosExamesFormatado += ` ${urCrFormatado} //`;
+    }
+
+    // Adiciona Na, K, Mg, Ca, P, Cl com "/"
+    const eletrolitosFormatado = [
+        resultado["Na"] ? `Na ${resultado["Na"]}` : null,
+        resultado["K"] ? `K ${resultado["K"]}` : null,
+        resultado["Mg"] ? `Mg ${resultado["Mg"]}` : null,
+        resultado["Ca"] ? `Ca ${resultado["Ca"]}` : null,
+        resultado["P"] ? `P ${resultado["P"]}` : null,
+        resultado["Cl"] ? `Cl ${resultado["Cl"]}` : null
+    ]
+        .filter((item) => item !== null)
+        .join(" / ");
+    if (eletrolitosFormatado) {
+        outrosExamesFormatado += ` ${eletrolitosFormatado} //`;
+    }
+
+    // Adiciona TGO e TGP com "//"
+    if (resultado["TGO"] || resultado["TGP"]) {
+        const tgoTgpFormatado = [
+            resultado["TGO"] ? `TGO ${resultado["TGO"]}` : null,
+            resultado["TGP"] ? `TGP ${resultado["TGP"]}` : null
+        ]
+            .filter((item) => item !== null)
+            .join(" / ");
+        outrosExamesFormatado += ` ${tgoTgpFormatado} //`;
+    }
+
+    // Adiciona BT, BD, BI com "-"
+    if (resultado["BT"] || resultado["BD"] || resultado["BI"]) {
+        const btBdBiFormatado = [
+            resultado["BT"] ? `BT ${resultado["BT"]}` : null,
+            resultado["BD"] ? `BD ${resultado["BD"]}` : null,
+            resultado["BI"] ? `BI ${resultado["BI"]}` : null
+        ]
+            .filter((item) => item !== null)
+            .join(" - ");
+        outrosExamesFormatado += ` ${btBdBiFormatado} //`;
+    }
+
+    // Adiciona PCR com "//"
+    if (resultado["PCR"]) {
+        outrosExamesFormatado += ` PCR ${resultado["PCR"]} //`;
+    }
+
+    // Adiciona TTPA e RATIO com "-"
+    if (resultado["TTPA"] || resultado["RATIO"]) {
+        const ttpaRatioFormatado = [
+            resultado["TTPA"] ? `TTPA ${resultado["TTPA"]}` : null,
+            resultado["RATIO"] ? `RATIO ${resultado["RATIO"]}` : null
+        ]
+            .filter((item) => item !== null)
+            .join(" - ");
+        outrosExamesFormatado += ` ${ttpaRatioFormatado}`;
+    }
+
     if (outrosExamesFormatado) {
-        resultadoFormatado += `${outrosExamesFormatado} //\n`;
+        resultadoFormatado += `${outrosExamesFormatado}\n`;
     }
 
     // Adiciona "OUTROS" apenas se houver valor
