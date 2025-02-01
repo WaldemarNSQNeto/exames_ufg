@@ -171,6 +171,26 @@ button:hover {
     font-weight: bold; /* Negrito para destacar mais */
 }
 
+/* Estilo para o botão "Limpar Dados" */
+#limparDados {
+    display: block; /* Mostrar o botão */
+    width: 100%; /* Largura total */
+    padding: 12px; /* Espaçamento interno */
+    background-color: #dc3545; /* Cor vermelha */
+    color: #fff; /* Texto branco */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    font-weight: 500; /* Peso da fonte */
+    cursor: pointer; /* Cursor de ponteiro */
+    margin-top: 10px; /* Espaçamento superior */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+#limparDados:hover {
+    background-color: #c82333; /* Cor vermelha mais escura ao passar o mouse */
+}
+
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
     .form-group {
