@@ -217,36 +217,54 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
     // Mostra os botões "Copiar Resultados" e "Limpar Dados"
     document.getElementById('copiarResultado').style.display = 'block';
     document.getElementById('limparDados').style.display = 'block';
+
+    // Rola a página até a área de resultados
+    document.querySelector('.resultado-container').scrollIntoView({ behavior: 'smooth' });
 });
 
-// Função para copiar o resultado
 document.getElementById('copiarResultado').addEventListener('click', function () {
-    const resultadoTexto = document.getElementById('resultado').textContent; // Usa textContent para capturar o texto
+    const resultadoTexto = document.getElementById('resultado').innerText;
 
-    // Verifica se a API Clipboard está disponível
+    // Verifica se a API Clipboard está disponível (para navegadores modernos)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(resultadoTexto)
             .then(() => {
                 alert('Resultado copiado para a área de transferência!');
             })
-            .catch(() => {
-                alert('Erro ao copiar o resultado. Tente novamente.');
+            .catch((err) => {
+                console.error('Erro ao copiar via clipboard API', err);
+                fallbackCopyTextToClipboard(resultadoTexto);
             });
     } else {
-        // Fallback para navegadores que não suportam navigator.clipboard
-        const textarea = document.createElement('textarea');
-        textarea.value = resultadoTexto;
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            alert('Resultado copiado para a área de transferência!');
-        } catch (err) {
-            alert('Erro ao copiar o resultado. Tente novamente.');
-        }
-        document.body.removeChild(textarea);
+        // Se a API Clipboard não estiver disponível, utilizamos a alternativa
+        fallbackCopyTextToClipboard(resultadoTexto);
     }
 });
+
+// Função de fallback usando textarea
+function fallbackCopyTextToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');  // Torna o textarea somente leitura
+    textarea.style.position = 'absolute';   // Coloca o textarea fora da tela
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();  // Seleciona o texto
+
+    try {
+        const successful = document.execCommand('copy'); // Tenta copiar
+        if (successful) {
+            alert('Resultado copiado para a área de transferência!');
+        } else {
+            alert('Erro ao copiar o resultado. Tente novamente.');
+        }
+    } catch (err) {
+        console.error('Erro ao usar execCommand', err);
+        alert('Erro ao copiar o resultado. Tente novamente.');
+    }
+    document.body.removeChild(textarea);  // Remove o textarea da página
+}
+
 
 // Função para limpar os dados do formulário
 document.getElementById('limparDados').addEventListener('click', function () {
@@ -259,7 +277,11 @@ document.getElementById('limparDados').addEventListener('click', function () {
     // Oculta os botões "Copiar Resultados" e "Limpar Dados"
     document.getElementById('copiarResultado').style.display = 'none';
     document.getElementById('limparDados').style.display = 'none';
-  
-  // Rola a página para o início do formulário
+
+    // Rola a página para o início do formulário
     document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+});
+document.getElementById('scrollToResultado').addEventListener('click', function() {
+    // Rola suavemente até o elemento com o id 'resultado'
+    document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
 });
