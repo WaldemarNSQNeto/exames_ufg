@@ -98,7 +98,7 @@ input:focus {
 button {
     display: block;
     width: 100%;
-    padding: 12px;
+    padding: 11px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -130,17 +130,17 @@ button:hover {
 }
 
 .resultado-header h2 {
-    font-size: 18px;
+    font-size: 21px;
     color: #007bff;
     margin: 0;
 }
 
 .resultado-header button {
-    padding: 4px 8px; /* Ajuste o padding para um tamanho menor */
+    padding: 8px 8px; /* Ajuste o padding para um tamanho menor */
     background-color: #28a745;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 9px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -189,12 +189,12 @@ button:hover {
 #limparDados {
     display: block; /* Mostrar o botão */
     width: 100%; /* Largura total */
-    padding: 12px; /* Espaçamento interno */
+    padding: 8px; /* Espaçamento interno */
     background-color: #dc3545; /* Cor vermelha */
     color: #fff; /* Texto branco */
     border: none; /* Sem borda */
     border-radius: 5px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho da fonte */
+    font-size: 14px; /* Tamanho da fonte */
     font-weight: 500; /* Peso da fonte */
     cursor: pointer; /* Cursor de ponteiro */
     margin-top: 10px; /* Espaçamento superior */
@@ -216,4 +216,25 @@ button:hover {
     .form-group {
         flex: 1 1 calc(50% - 15px); /* 2 campos por linha em telas muito pequenas */
     }
+}
+
+/* Estilo para o botão suspenso */
+.scroll-button {
+    position: fixed; /* Fixa o botão no lado direito */
+    right: 0px; /* Distância da borda direita */
+    bottom: 2px; /* Distância da borda inferior */
+    background-color: #000000; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remove borda */
+    border-radius: 0%; /* Torna o botão redondo */
+    padding: 2px; /* Tamanho do botão */
+    font-size: 15px; /* Tamanho da seta */
+    cursor: pointer; /* Mostra o ponteiro ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra do botão */
+    transition: background-color 0.3s ease; /* Efeito ao passar o mouse */
+}
+
+/* Efeito de hover para o botão */
+.scroll-button:hover {
+    background-color: #0056b3; /* Altera a cor quando o mouse passa sobre */
 }
