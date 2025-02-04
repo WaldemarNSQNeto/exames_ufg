@@ -168,7 +168,7 @@
 
       // Adiciona "OUTROS" apenas se houver valor
       if (resultado["OUTROS"]) {
-          resultadoFormatado += `OUTROS ${resultado["OUTROS"]}\n`;
+          resultadoFormatado += `${resultado["OUTROS"]}\n`; // Apenas o conteúdo digitado
       }
 
       // PARTE 04: GASOMETRIA ARTERIAL
