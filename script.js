@@ -1,4 +1,37 @@
-  document.getElementById('exameForm').addEventListener('submit', function (event) {
+ document.addEventListener('DOMContentLoaded', function () {
+    // Credenciais válidas
+    const validCredentials = {
+        "ADMIN": "ADMIN",
+        "VICHUGO": "VICHUGO",
+        "JUAQUI": "AMORZINHO",
+        "Med1": "Med11",
+        "Med2": "Med22",
+        "Med3": "Med33",
+        "TESTE": "TESTE",
+        
+    };
+
+    // Função de login
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Captura os valores do formulário
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Verifica se as credenciais são válidas
+        if (validCredentials[username] && validCredentials[username] === password) {
+            // Esconde a tela de login e mostra o formulário de exames
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('form-screen').style.display = 'block';
+        } else {
+            // Exibe mensagem de erro
+            document.getElementById('login-error').style.display = 'block';
+        }
+    });
+});
+
+document.getElementById('exameForm').addEventListener('submit', function (event) {
       event.preventDefault(); // Impede o envio do formulário
 
       // Captura os dados do formulário
@@ -279,12 +312,19 @@
       document.getElementById('limparDados').style.display = 'none';
 
       // Rola a página para o início do formulário
-      document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+     window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    
+    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
   });
   document.addEventListener('DOMContentLoaded', function () {
-      // Função de scroll para o resultado
+          
+    
+    // Função de scroll para o resultado
       document.getElementById('scrollToResultado').addEventListener('click', function() {
           // Rola suavemente até o elemento com o id 'resultado'
-          document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+         document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
       });
   });
