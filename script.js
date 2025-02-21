@@ -3,7 +3,7 @@
     const validCredentials = {
         "ADMIN": "ADMIN",
         "VICHUGO": "VICHUGO",
-        "JUAQUI": "AMORZINHO",
+        "JUAQUINO": "AMORZINHO",
         "Med1": "Med11",
         "Med2": "Med22",
         "Med3": "Med33",
