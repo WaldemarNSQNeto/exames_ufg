@@ -296,16 +296,16 @@ button:hover {
     font-family: inherit;
 }
 
-/* Destacar a palavra "GLICOSE" no campo "OUTROS" */
-.resultado pre .destaque-glicose {
+/* Destacar a palavra "GLICEMIA" no campo "OUTROS" */
+.resultado pre .destaque-GLICEMIA {
     background-color: #fff3cd; /* Fundo amarelo claro */
     padding: 2px 5px;
     border-radius: 3px;
     font-weight: 500;
 }
 
-/* Estilo para destacar o campo GLICOSE */
-.destaque-glicose {
+/* Estilo para destacar o campo GLICEMIA */
+.destaque-GLICEMIA {
     background-color: #ffeb3b; /* Amarelo chamativo */
     padding: 2px 5px; /* Espaçamento interno */
     border-radius: 3px; /* Bordas arredondadas */
@@ -365,3 +365,52 @@ button:hover {
 .scroll-button:hover {
     background-color: #0056b3; /* Altera a cor quando o mouse passa sobre */
 }
+
+.destacar-glicemia {
+    background-color: rgb(255, 255, 58); /* Cor de fundo amarelo */
+    font-weight: bold; /* Deixa o texto em negrito */
+    display: inline-block; /* Garante que o fundo abranja apenas o texto */
+    padding: 0 2px; /* Reduz o padding para se ajustar melhor ao texto */
+}
+
+
+
+/* Cabeçalho com Título e QR Code */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para o Botão "Sair" */
+.logout-button {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #f8f9fa;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+    padding: 0px 8px; /* Removendo padding em cima e em baixo e diminuindo as laterais*/
+    font-size: 15px; /* Reduz a fonte*/
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 10;
+    line-height: 2;
+    white-space: nowrap;
+    height: auto; /*Ajustando a altura do botão*/
+    width: auto; /*Ajustando a largura do botão*/
+}
+
+.logout-button:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+
+
