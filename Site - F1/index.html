@@ -32,6 +32,9 @@
     <div class="container">
         <!-- Cabeçalho com Título e QR Code -->
         <div class="header-container">
+            <!-- Botão Sair -->
+            <button id="logout-button" class="logout-button">Sair</button>
+
             <h1>Formulário de Exames</h1>
             <div class="qr-code-container">
                 <img src="https://i.imgur.com/nykdfes.jpeg" alt="QR Code para doação" class="qr-code">
@@ -57,8 +60,9 @@
                     </div>
                     <div class="form-group">
                         <label for="dataExame">Data do Exame:</label>
-                        <input type="date" id="dataExame" name="Data do Exame">
+                        <input type="date" id="dataExame" name="Data do Exame" min="1900-01-01" max="2050-12-31">
                     </div>
+                    
                 </div>
             </fieldset>
 
@@ -172,8 +176,8 @@
                         <input type="text" id="inr" name="INR" inputmode="numeric">
                     </div>
                     <div class="form-group">
-                        <label for="glicose">GLICOSE:</label>
-                        <input type="text" id="glicose" name="GLICOSE" inputmode="numeric">
+                        <label for="glicemia"><span class="destacar-glicemia">GLICEMIA:</span></label>
+                        <input type="text" id="glicemia" name="GLICEMIA" inputmode="numeric">
                     </div>
                     <div class="form-group">
                         <label for="ur">UR:</label>
@@ -389,6 +393,10 @@
                     <div class="form-group">
                         <label for="filMuco">FIL. MUCO:</label>
                         <input type="text" id="filMuco" name="FIL. MUCO">
+                    </div>
+                    <div class="form-group">
+                        <label for="easoutros">OUTRAS INFORMAÇÕES:</label>
+                        <input type="text" id="easoutros" name="easOUTROS">
                     </div>
                 </div>
             </fieldset>
