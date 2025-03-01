@@ -103,7 +103,7 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
 
       // PARTE 03: OUTROS EXAMES
       const camposOutrosExames = [
-          "TAP", "INR", "GLICOSE", "UR", "CR", "Na", "K", "Mg", "Ca", "P", "Cl", "TGO", "TGP", "BT", "BD", "BI", "PCR", "TTPA", "RATIO"
+          "TAP", "INR", "GLICEMIA", "UR", "CR", "Na", "K", "Mg", "Ca", "P", "Cl", "TGO", "TGP", "BT", "BD", "BI", "PCR", "TTPA", "RATIO"
       ];
       let outrosExamesFormatado = "";
 
@@ -125,9 +125,9 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
           }
       }
 
-      // Adiciona GLICOSE com "//"
-      if (resultado["GLICOSE"]) {
-          outrosExamesFormatado += ` GLICOSE ${resultado["GLICOSE"]} //`;
+      // Adiciona GLICEMIA com "//"
+      if (resultado["GLICEMIA"]) {
+          outrosExamesFormatado += ` GLICEMIA ${resultado["GLICEMIA"]} //`;
       }
 
       // Adiciona UR e CR com "/"
@@ -229,19 +229,27 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
       }
 
       // PARTE 06: EAS
-      const camposEAS = [
-          "ASPECTO", "pH (EAS)", "PTN", "GLICO", "CETONAS", "BLRBN", "SANGUE", "NITRITO", "Á. ASCÓRBICO", "EST. LEUCO", "CEL. EPIT.", "LEUCO", "HEMAC", "CILINDROS", "FIL. MUCO"
-      ];
-      const easFormatado = camposEAS
-          .map((campo) => (resultado[campo] ? `${campo} ${resultado[campo]}` : null))
-          .filter((item) => item !== null)
-          .join(" / ");
-      if (easFormatado) {
-          resultadoFormatado += `EAS - ${easFormatado}\n`;
+    const camposEAS = [
+    "ASPECTO", "pH (EAS)", "PTN", "GLICO", "CETONAS", "BLRBN", "SANGUE", "NITRITO", "Á. ASCÓRBICO", "EST. LEUCO", "CEL. EPIT.", "LEUCO", "HEMAC", "CILINDROS", "FIL. MUCO",
+    ];
+    const easFormatado = camposEAS
+        .map((campo) => (resultado[campo] ? `${campo} ${resultado[campo]}` : null))
+        .filter((item) => item !== null)
+        .join(" / ");
+
+    if (easFormatado) {
+    resultadoFormatado += `EAS - ${easFormatado}`;
+
+    // Adiciona "easOUTROS" se houver valor, na mesma linha, após / e entre << >>
+    if (resultado["easOUTROS"]) {
+        resultadoFormatado += ` / << ${resultado["easOUTROS"]} >>`;
+    }
+    resultadoFormatado += `\n`; // Adiciona a nova linha depois de adicionar o "easOUTROS"
+
       }
 
-      // Destacar a palavra "GLICOSE"
-      resultadoFormatado = resultadoFormatado.replace(/GLICOSE/g, '<span class="destaque-glicose">GLICOSE</span>');
+      // Destacar a palavra "GLICEMIA"
+        resultadoFormatado = resultadoFormatado.replace(/GLICEMIA/g, '<span class="destaque-GLICEMIA">GLICEMIA</span>');
 
       // Exibe o resultado formatado
       const resultadoDiv = document.getElementById('resultado');
@@ -265,7 +273,7 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
                   alert('Resultado copiado para a área de transferência!');
               })
               .catch((err) => {
-                  console.error('Erro ao copiar via clipboard API', err);
+                  console.error('Erro ao copiar!', err);
                   fallbackCopyTextToClipboard(resultadoTexto);
               });
       } else {
@@ -328,3 +336,12 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
          document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
       });
   });
+
+
+// Adiciona um ouvinte de evento ao botão "Sair"
+document.getElementById('logout-button').addEventListener('click', function() {
+    // Esconde a tela do formulário
+    document.getElementById('form-screen').style.display = 'none';
+    // Mostra a tela de login
+    document.getElementById('login-screen').style.display = 'block';
+});
