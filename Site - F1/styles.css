@@ -249,11 +249,12 @@ button:hover {
     border: 1px solid #ddd;
 }
 
-.resultado-header {
-    display: flex;
-    justify-content: space-between; /* Mantém os elementos espaçados */
-    align-items: center;
-    margin-bottom: 10px;
+.resultado-header{
+    display: flex; /* Ativa flexbox */
+    justify-content: space-between;/*Distribui o espaço entre os elementos.*/
+    align-items: center;/*Alinha verticalmente os itens ao centro.*/
+    margin-bottom: 20px;/*espaço entre a header e o resto do conteúdo*/
+    flex-wrap: wrap; /* permite que os elementos quebrem para a linha de baixo se não houver espaço */
 }
 
 /* Estilo para o contêiner dos botões "Copiar" e "Imprimir" */
@@ -513,6 +514,55 @@ button:hover {
         margin-bottom: 2cm;
         margin-left: 3cm;
         margin-right: 2cm;
+    }
+}
+
+
+/* Estilos para telas menores que 768px (smartphones) */
+@media (max-width: 768px) {
+    .botoes-resultado {
+        display: flex;
+        flex-direction: column; /* Botões empilhados verticalmente */
+        gap: 10px; /* Espaçamento entre os botões */
+        width: 100%; /* Ocupar toda a largura */
+        margin-top: 10px;
+        padding: 0 10px;/* Um espaçamento interno nas laterais para evitar que fique muito colado às bordas */
+    }
+
+    .botoes-resultado button {
+        width: 100%; /* Ocupar toda a largura disponível */
+        box-sizing: border-box; /* Incluir padding e border no cálculo da largura */
+        padding: 10px; /* Aumentar o espaçamento interno */
+        margin: 0; /* Remover margens indesejadas */
+        font-size: 1rem;
+    }
+
+    .resultado-container{
+        padding: 10px;/* Um espaçamento interno nas laterais para evitar que fique muito colado às bordas */
+    }
+
+    .resultado-header{
+        flex-direction: column;/*deixa o h2 em cima e os botões embaixo.*/
+    }
+
+    .resultado-titulo{
+        margin-bottom: 10px;/* Um espaço abaixo do H2, já que está tudo em coluna */
+        text-align: center; /* centraliza o texto, se quiser */
+    }
+
+    .botoes-resultado button {
+        background-color: #007bff; /* Cor de fundo */
+        color: white; /* Cor do texto */
+        border: none; /* Remover borda padrão */
+        padding: 10px 20px; /* Espaçamento interno */
+        cursor: pointer; /* Mãozinha */
+        border-radius: 5px; /* Bordas arredondadas */
+        font-size: 16px; /* Tamanho da fonte */
+        transition: background-color 0.3s; /* Transição suave da cor de fundo */
+    }
+    
+    .botoes-resultado button:hover {
+        background-color: #0056b3; /* Escurecer um pouco ao passar o mouse */
     }
 }
 
