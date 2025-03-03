@@ -344,4 +344,10 @@ document.getElementById('logout-button').addEventListener('click', function() {
     document.getElementById('form-screen').style.display = 'none';
     // Mostra a tela de login
     document.getElementById('login-screen').style.display = 'block';
+
+    // Limpa os campos de usuário e senha
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    // Limpa a mensagem de erro, caso esteja visível.
+    document.getElementById('login-error').style.display = 'none';
 });
