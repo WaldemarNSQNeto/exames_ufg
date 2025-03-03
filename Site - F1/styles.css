@@ -530,11 +530,13 @@ button:hover {
     }
 
     .botoes-resultado button {
-        width: 100%; /* Ocupar toda a largura disponível */
-        box-sizing: border-box; /* Incluir padding e border no cálculo da largura */
-        padding: 10px; /* Aumentar o espaçamento interno */
-        margin: 0; /* Remover margens indesejadas */
-        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px; /* Aumentando o padding para facilitar o clique */
+        margin: 0;
+        font-size: 1rem; /* Tamanho da fonte */
+        height: auto;/* deixa a altura automatica*/
+        line-height: normal; /* remove a altura da linha para que ela fique automatica*/
     }
 
     .resultado-container{
@@ -563,8 +565,19 @@ button:hover {
     
     .botoes-resultado button:hover {
         background-color: #0056b3; /* Escurecer um pouco ao passar o mouse */
+
+    /*Estilo específico do botão de copiar*/
+    #copiarResultado{
+        font-size: 0.9rem; /* Reduzindo um pouco o tamanho da fonte */
+        padding: 8px; /* Reduzindo o padding, já que é um texto menor */
+        white-space: normal; /* Permite quebrar o texto em várias linhas */
+    }
+    #imprimirResultado{
+        font-size: 0.9rem; /* Reduzindo um pouco o tamanho da fonte */
+        padding: 8px; /* Reduzindo o padding, já que é um texto menor */
+        white-space: normal; /* Permite quebrar o texto em várias linhas */
+    }
     }
 }
-
 
 
