@@ -27,6 +27,7 @@
         </form>
     </div>
 
+    
     <!-- Tela do Formulário de Exames (inicialmente oculta) -->
     <div id="form-screen" class="container" style="display: none;">
     <div class="container">
@@ -44,8 +45,8 @@
 
         <!-- Autor do Formulário -->
         <p class="autor">
-            Por Waldemar Neto - Interno Turma LXIX <br>
-            <a href="https://www.instagram.com/waldemar3005/" target="_blank" rel="noopener noreferrer">@waldemar3005</a>
+            Asklepios Soluções Médicas<br>
+            Startup by <a href="https://www.instagram.com/waldemar3005/" target="_blank" rel="noopener noreferrer">Waldemar Neto</a> - Interno Turma LXIX
         </p>
 
         <!-- Formulário de Exames -->
@@ -407,10 +408,14 @@
         <!-- Área para exibir o resultado -->
         <div class="resultado-container">
             <div class="resultado-header">
-                <h2>Resultados</h2>
-                <button id="copiarResultado" style="display: none;">Copiar Resultados</button>
+                <h2 class="resultado-titulo">Resultados</h2>
+                <div class="botoes-resultado">
+                    <button id="imprimirResultado" style="display: none;">Imprimir</button>
+                    <button id="copiarResultado" style="display: none;">Copiar Resultados</button>
+                </div>
             </div>
             <div id="resultado" class="resultado"></div>
+        </div>
             <!-- Botão Limpar Dados -->
             <button id="limparDados" style="display: none; background-color: #dc3545; margin-top: 10px;">Limpar Dados</button>
         </div>
