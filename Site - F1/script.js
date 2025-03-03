@@ -257,6 +257,7 @@ document.getElementById('exameForm').addEventListener('submit', function (event)
 
       // Mostra os botões "Copiar Resultados" e "Limpar Dados"
       document.getElementById('copiarResultado').style.display = 'block';
+      document.getElementById('imprimirResultado').style.display = 'block';
       document.getElementById('limparDados').style.display = 'block';
 
       // Rola a página até a área de resultados
@@ -351,3 +352,92 @@ document.getElementById('logout-button').addEventListener('click', function() {
     // Limpa a mensagem de erro, caso esteja visível.
     document.getElementById('login-error').style.display = 'none';
 });
+
+
+
+// Função para imprimir apenas a área de resultados
+document.getElementById('imprimirResultado').addEventListener('click', function() {
+    const resultadoContainer = document.querySelector('.resultado-container');
+    // Cria uma cópia do elemento que será impresso
+    const conteudoParaImprimir = resultadoContainer.cloneNode(true);
+
+    // Cria o título "RESULTADO DE EXAMES LABORATORIAIS"
+    const titulo = document.createElement('h1');
+    titulo.textContent = "RESULTADO DE EXAMES LABORATORIAIS";
+    titulo.style.textAlign = 'center'; // Centraliza o texto
+    titulo.style.fontSize = '16px';    // Define o tamanho da fonte
+    titulo.style.marginBottom = '20px'; // Adiciona uma margem abaixo do título
+
+    // Cria uma nova janela temporária para a impressão
+    const janelaImpressao = window.open('', '_blank');
+
+    // Adiciona o título ao corpo da janela de impressão
+    janelaImpressao.document.body.appendChild(titulo);
+    // Adiciona o conteúdo copiado à janela de impressão
+    janelaImpressao.document.body.appendChild(conteudoParaImprimir);
+
+    //Adiciona o CSS para o formato de impressão
+    const style = janelaImpressao.document.createElement("style");
+    style.innerHTML = `
+        body {
+            padding: 0;
+            width: 21cm; /* Largura de uma folha A4 */
+            height: 29.7cm; /* Altura de uma folha A4 */
+            margin: 0 auto; /* Centraliza na página */
+        }
+        .container{
+            padding: 0;
+        }
+        .resultado-container {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .resultado-header{
+            display: none;
+        }
+         /* Oculta o botão limpar dados */
+        #limparDados{
+            display: none !important;
+        }
+        /*oculta o título de resultado*/
+        .resultado-container > h2{
+            display: none;
+        }
+
+        .resultado{
+            font-size: 14px; /* Alterado para 14px */
+            color: black;
+            margin-top: 0px;
+        }
+
+        pre{
+            margin: 0;
+            font-family: inherit;
+        }
+        .destaque-GLICEMIA {
+            background-color: #ffeb3b;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        /* Força o formato retrato */
+        @page {
+            size: A4 portrait;
+            margin-top: 2cm;
+            margin-bottom: 2cm;
+            margin-left: 3cm;
+            margin-right: 2cm;
+        }
+    `;
+    janelaImpressao.document.head.appendChild(style);
+
+    //Imprime
+    janelaImpressao.print();
+    janelaImpressao.close();
+});
+
+
+
+
