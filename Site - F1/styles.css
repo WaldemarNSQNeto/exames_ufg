@@ -251,10 +251,21 @@ button:hover {
 
 .resultado-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Mantém os elementos espaçados */
     align-items: center;
     margin-bottom: 10px;
 }
+
+/* Estilo para o contêiner dos botões "Copiar" e "Imprimir" */
+.botoes-resultado {
+    display: flex;
+    flex-direction: row; /* Organiza os botões em linha */
+    gap: 3px; /* Espaçamento entre os botões */
+    align-items: flex-end; /* Para alinhar os botões a direita */
+    margin-bottom: 0px; /* Remove a margem inferior que estava */
+}
+
+
 
 .resultado-header h2 {
     font-size: 21px;
@@ -262,8 +273,9 @@ button:hover {
     margin: 0;
 }
 
-.resultado-header button {
-    padding: 8px 8px; /* Ajuste o padding para um tamanho menor */
+.resultado-header button,
+#copiarResultado { /*Ajustando para seletor mais específico */
+    padding: 8px 8px;
     background-color: #28a745;
     color: #fff;
     border: none;
@@ -271,9 +283,9 @@ button:hover {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-left: 10px; /* Espaçamento à esquerda para separar do título */
-    flex-shrink: 0; /* Impede que o botão encolha */
-    width: auto; /* Ajusta o comprimento do botão ao tamanho do texto */
+    flex-shrink: 0;
+    width: auto;
+    white-space: nowrap; /* Impedir a quebra de linha */
 }
 
 .resultado-header button:hover {
@@ -411,5 +423,98 @@ button:hover {
     background-color: #dc3545;
     color: #fff;
 }
+
+
+.resultado-header button {
+    padding: 8px 8px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
+    width: auto;
+}
+
+/* Estilo específico para o botão "Imprimir" */
+#imprimirResultado {
+    background-color: #ffc107; /* Amarelo */
+}
+
+#imprimirResultado:hover {
+    background-color: #e0a800; /* Amarelo mais escuro no hover */
+}
+
+
+/* Estilos específicos para a impressão */
+@media print {
+    /* Oculta os botões "Copiar Resultados", "Imprimir" e "Limpar Dados" */
+    #copiarResultado,
+    #imprimirResultado,
+    #limparDados {
+        display: none !important; /* !important garante que essa regra seja aplicada */
+    }
+    /* Oculta o botão de scroll */
+    .scroll-button{
+        display: none !important;
+    }
+     /* Oculta o botão de logout */
+    .logout-button{
+        display: none !important;
+    }
+
+    /* Ajusta margens e espaçamentos para a impressão */
+    body {
+        padding: 0;
+        width: 21cm; /* Largura de uma folha A4 */
+        height: 29.7cm; /* Altura de uma folha A4 */
+        margin: 0 auto; /* Centraliza na página */
+    }
+    .container{
+        padding: 0;
+    }
+    .resultado-container {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .resultado-header{
+        display: none;
+    }
+    /*oculta o título de resultado*/
+    .resultado-container > h2{
+        display: none;
+    }
+
+    .resultado{
+        font-size: 12px;
+        color: black;
+        margin-top: 0px;
+    }
+
+    pre{
+        margin: 0;
+        font-family: inherit;
+    }
+    .destaque-GLICEMIA {
+        background-color: #ffeb3b;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+    /* Força o formato retrato */
+    @page {
+        size: A4 portrait;
+        margin-top: 2cm;
+        margin-bottom: 2cm;
+        margin-left: 3cm;
+        margin-right: 2cm;
+    }
+}
+
 
 
